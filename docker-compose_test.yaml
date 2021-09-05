@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  nginx:
+    build:
+      context: ./docker/dev/nginx
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/var/www
+      - ./docker/dev/nginx/logs:/var/log/nginx
+    ports:
+      # Nuxt port
+      - 8080:80
+      # Laravel port
+      - 8081:81
+    depends_on:
+      - laravel_blog-backend
+      - nuxt-frontend
+  laravel_blog-backend:
+    build:
+#    ./laravel_blog-backend/
+      context: docker/dev/laravel_blog-backend
+      dockerfile: Dockerfile
+#    ports:
+#      - 8000:8000
+    environment:
+      PHP_IDE_CONFIG: "serverName=Docker"
+      TZ: Europe/Moscow
+    volumes:
+      - ./laravel_blog-backend:/var/www
+  nuxt-frontend:
+    build:
+#    ./nuxt-frontend/
+      context: ./nuxt-frontend/
+      dockerfile: docker/Dockerfile
+#    ports:
+#      - 3000:3000
+    volumes:
+      - ./nuxt-frontend/:/var/www
