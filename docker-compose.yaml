@@ -38,10 +38,28 @@ services:
     volumes:
       - ./nuxt-frontend/:/var/www
 
+  # PostgreSQL database container
+  postgres:
+    build:
+      context: docker/dev/postgres
+      dockerfile: Dockerfile
+    volumes:
+      # Database volume
+      - database:/var/lib/postgresql/data
+      # Temp volume to allow using dumps
+      - ./docker/dev/postgres/dumps/:/tmp/
+    ports:
+      - 54321:5432
+    environment:
+      - LC_ALL=C.UTF-8
+      - POSTGRES_DB=app
+      - POSTGRES_USER=app
+      - POSTGRES_PASSWORD=app
+
 ########## Volumes ###################################
-#
-#volumes:
-#  database:
-#    driver: local
+
+volumes:
+  database:
+    driver: local
 #  redis:
 #    driver: local

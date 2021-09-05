@@ -42,3 +42,7 @@ down:
 prepare-composer:
 	docker-compose exec laravel_blog-backend composer install
 	docker-compose exec laravel_blog-backend cd /var/www/laravel_blog-backend/ && composer install && chown ${UID}:${UID} vendor/ -R
+
+# Run terminal of the php container
+laravel:
+	docker-compose exec laravel_blog-backend bash
