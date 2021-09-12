@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Api\BaseController;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
-class UserController extends Controller
+class UserController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -48,8 +51,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        dd(123);
-        return response()->json($user->all()->toArray());
+        //
     }
 
     /**
@@ -84,5 +86,11 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    public function info(Request $request): JsonResponse
+    {
+        Log::info(1111111111111111111111);
+        return $this->sendResponse(Auth::user());
     }
 }

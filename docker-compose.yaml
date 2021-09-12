@@ -26,6 +26,9 @@ services:
     environment:
       PHP_IDE_CONFIG: "serverName=Docker"
       TZ: Europe/Moscow
+      XDEBUG_PORT: 9000
+      XDEBUG_HOST: 127.0.0.1
+      XDEBUG_IDKEY: DEFKEY
     volumes:
       - ./laravel_blog-backend:/var/www/laravel_blog-backend
   nuxt-frontend:

@@ -3,6 +3,10 @@ class Api {
     return this.get('/api/users', {}, {path: route.path});
   }
 
+  getPosts(route) {
+    return this.get('/api/posts/my', {}, {path: route.path});
+  }
+
   get(path, data = {}, headers = {}, credentials = false) {
     return {
       url: path,
